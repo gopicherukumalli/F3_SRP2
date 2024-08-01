@@ -97,11 +97,11 @@ public class FlyAdealCacheFlow{
 				options.addArguments("--headless");
 				driver = new FirefoxDriver(options);
 				driver.manage().window().maximize();
-				driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+				driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 				driver.manage().deleteAllCookies();
 				driver.get(flyAdealApiUrl);
 				new BaseClass(driver);
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 				flyAdeal.FlightDetails2(driver,PnrDetails);
 				driver.quit();
 				

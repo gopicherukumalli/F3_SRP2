@@ -2,7 +2,7 @@ name: F3SRP
 
 on:
   schedule:
-    - cron: '* * * * *'
+     - cron: '*/10 0-23 * * *'
 
 jobs:
   runtests:

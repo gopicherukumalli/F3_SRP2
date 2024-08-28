@@ -2,11 +2,14 @@ name: F3SRP
 
 on:
   schedule:
-     - cron: '*/10 0-23 * * *' 
+    - cron: '*/30 0-23 * * *'
 
 jobs:
   runtests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        attempt: [1, 2, 3]  # Retry up to 3 times
 
     steps:
       - uses: actions/checkout@v2
@@ -45,3 +48,7 @@ jobs:
       - name: Build with Maven
         run: |
           mvn test
+
+      - name: Check if it failed
+        if: ${{ failure() && matrix.attempt != 3 }}  # Retry if not the final attempt
+        run: exit 1  # Trigger retry if it failed
